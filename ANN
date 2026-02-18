@@ -1,0 +1,60 @@
+import math
+
+#-----------------------#
+#        INPUTS         #
+#-----------------------#
+
+x1 = 1
+x2 = 1
+target = 0
+
+# bias
+b0 = 0.60
+b1 = 0.35
+b2 = 0.35
+
+# weights
+w11 , w12 = 0.15 , 0.25
+w21 , w22 = 0.20 , 0.30
+v1  , v2  = 0.40 , 0.45
+
+# sigmoid activation function
+def sigmoid_funct(z):
+  return (1/(1+math.exp(-z)))
+
+
+#-----------------------#
+#     HIDDEN LAYER 1    #
+#-----------------------#
+
+h1 = b1 + (w11 * x1) + (w21 * x2)
+h2 = b2 + (w12 * x1) + (w22 * x2)
+
+print("hidden neuron 1 net input = ",round(h1,4))
+print("hidden neuron 2 net input = ",round(h2,4))
+
+h1 = sigmoid_funct(h1)
+h2 = sigmoid_funct(h2)
+
+print("hidden neuron 1    output = ",round(h1,4))
+print("hidden neuron 2    output = ",round(h2,4))
+
+#-----------------------#
+#      OUTPUT LAYER     #
+#-----------------------#
+
+o = b0 + (v1 * h1) + (v2 * h2)
+
+print("output neuron net input = ",round(o,4))
+
+o = sigmoid_funct(o)
+
+print("output neuron    output = ",round(o,4))
+
+#-----------------------#
+#   Mean Squared Error  #
+#-----------------------#
+
+error = 0.5 * ((target - o)**2)
+
+print("mean squared error = ",round(error,4))
